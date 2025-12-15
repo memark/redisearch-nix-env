@@ -285,7 +285,7 @@
 
               # To profile the code or benchmarks
               samply
-              linuxPackages.perf
+              perf
 
               # For valgrind
               valgrind
