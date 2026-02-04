@@ -363,9 +363,9 @@
                 ];
               }))
 
-              (rust-bin.selectLatestNightlyWith (toolchain: toolchain.default.override {
+              (rust-bin.nightly."2025-07-30".default.override {
                 extensions = [ "rust-src" "miri" "llvm-tools-preview" ];
-              }))
+              })
 
               # To resolve ASAN symbols
               llvmPackages.bintools
