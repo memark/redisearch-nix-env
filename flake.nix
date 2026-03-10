@@ -46,7 +46,10 @@
           overlays = [ (import rust-overlay) ];
           config.allowUnfree = true;
         };
-        redis-source = redis-flake.packages.${system}.redis;
+        
+        redis-source = if pkgs.stdenv.isDarwin
+          then pkgs.redis
+          else redis-flake.packages.${system}.redis;
 
         paramiko_3_5_1 = (pkgs.python313Packages.paramiko.overridePythonAttrs (old: rec {
           version = "3.5.1";
@@ -143,18 +146,23 @@
             pandas
             paramiko_3_5_1
             psutil
-            # The newest version (9.0) has a different structure which causes the profiler to not get the `brand` key correctly
-            # So we override the version to 5.0.0
-            (py-cpuinfo.overridePythonAttrs (old: rec {
-              version = "5.0.0";
+            (if pkgs.stdenv.isLinux then
+              # The newest version (9.0) has a different structure which causes the profiler to not get the `brand` key correctly
+              # So we override the version to 5.0.0
+              (py-cpuinfo.overridePythonAttrs (old: rec {
+                version = "5.0.0";
 
-              src = pkgs.fetchFromGitHub {
-                owner = "workhorsy";
-                repo = "py-cpuinfo";
-                rev = "v5.0.0";
-                hash = "sha256-EbeWNXjfdgb9yZAh3+kVLBDKMVFMipV/gOUr2YxNtFM=";
-              };
-            }))
+                src = pkgs.fetchFromGitHub {
+                  owner = "workhorsy";
+                  repo = "py-cpuinfo";
+                  rev = "v5.0.0";
+                  hash = "sha256-EbeWNXjfdgb9yZAh3+kVLBDKMVFMipV/gOUr2YxNtFM=";
+                };
+              }))
+            else
+              # 5.0.0 doesn't build on aarch64, so we use the latest version anyway.
+              py-cpuinfo
+            )
             pygithub
             (pysftp.overridePythonAttrs (old: {
               # Fix dependency to use our custom paramiko version
@@ -250,8 +258,14 @@
 
               # For libclang dependency to work
               export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib"
+
               # For `sys/types.h` and `stddef.h` required by redismodules-rs
-              export BINDGEN_EXTRA_CLANG_ARGS="-I${pkgs.glibc.dev}/include -I${pkgs.gcc-unwrapped}/lib/gcc/x86_64-unknown-linux-gnu/14.3.0/include"
+              export BINDGEN_EXTRA_CLANG_ARGS="${
+                if pkgs.stdenv.isLinux then
+                  "-I${pkgs.glibc.dev}/include -I${pkgs.gcc-unwrapped}/lib/gcc/x86_64-unknown-linux-gnu/14.3.0/include"
+                else
+                  ""
+              }"
 
               # Force SVS to build from source instead of using precompiled library
               export CMAKE_ARGS="-DSVS_SHARED_LIB=OFF"
@@ -287,6 +301,11 @@
 
               rust-bin.stable.latest.default
 
+            ] ++ lib.optionals stdenv.isLinux [
+              # For redisbench-admin
+              ftsb
+              memtier-benchmark
+
               # To profile the code or benchmarks
               samply
               perf
@@ -295,10 +314,6 @@
               valgrind
               kdePackages.kcachegrind
               cargo-valgrind
-
-              # For redisbench-admin
-              ftsb
-              memtier-benchmark
             ];
 
             packages = with pkgs; [
@@ -323,8 +338,14 @@
 
               # For libclang dependency to work
               export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib"
+
               # For `sys/types.h` and `stddef.h` required by redismodules-rs
-              export BINDGEN_EXTRA_CLANG_ARGS="-I${pkgs.glibc.dev}/include -I${pkgs.gcc-unwrapped}/lib/gcc/x86_64-unknown-linux-gnu/14.3.0/include"
+              export BINDGEN_EXTRA_CLANG_ARGS="${
+                if pkgs.stdenv.isLinux then
+                  "-I${pkgs.glibc.dev}/include -I${pkgs.gcc-unwrapped}/lib/gcc/x86_64-unknown-linux-gnu/14.3.0/include"
+                else
+                  ""
+              }"
 
               # Force SVS to build from source instead of using precompiled library
               export CMAKE_ARGS="-DSVS_SHARED_LIB=OFF"
