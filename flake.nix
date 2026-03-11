@@ -303,6 +303,7 @@
 
               # For LTO
               clang_21
+              libxcrypt
               lld_21
               llvmPackages_21.bintools-unwrapped
 
