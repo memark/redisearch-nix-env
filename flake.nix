@@ -304,7 +304,7 @@
               # For LTO
               clang_21
               lld_21
-              llvm_21
+              llvmPackages_21.bintools-unwrapped
 
             ] ++ lib.optionals stdenv.isLinux [
               # For redisbench-admin
