@@ -302,6 +302,7 @@
               rust-bin.stable.latest.default
 
               # For LTO
+              binutils
               clang_21
               lld_21
 
