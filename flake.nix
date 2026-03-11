@@ -302,9 +302,9 @@
               rust-bin.stable.latest.default
 
               # For LTO
-              binutils
               clang_21
               lld_21
+              llvm_21
 
             ] ++ lib.optionals stdenv.isLinux [
               # For redisbench-admin
