@@ -301,6 +301,10 @@
 
               rust-bin.stable.latest.default
 
+              # For LTO
+              clang_21
+              lld_21
+
             ] ++ lib.optionals stdenv.isLinux [
               # For redisbench-admin
               ftsb
