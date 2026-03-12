@@ -331,6 +331,8 @@
               lldb
               vscode-extensions.vadimcn.vscode-lldb
             ];
+
+            LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.libxcrypt ];
           };
 
           nightly = pkgs.mkShell {
