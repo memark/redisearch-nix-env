@@ -299,6 +299,9 @@
               # For redisbench-admin
               ftsb
               memtier-benchmark
+
+              # Cache for faster rebuilds
+              sccache
             ];
 
             packages = with pkgs; [
