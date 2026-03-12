@@ -287,6 +287,12 @@
 
               rust-bin.stable.latest.default
 
+              # For LTO
+              clang_21
+              libxcrypt
+              lld_21
+              llvmPackages_21.bintools-unwrapped
+
               # To profile the code or benchmarks
               samply
               perf
@@ -313,6 +319,8 @@
               lldb
               vscode-extensions.vadimcn.vscode-lldb.adapter
             ];
+
+            LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [ pkgs.libxcrypt ];            
           };
 
           nightly = pkgs.mkShell {
