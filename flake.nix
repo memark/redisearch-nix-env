@@ -313,6 +313,7 @@
               ripgrep
               fd
               sd
+              uv
             ];
 
             packages = with pkgs; [
