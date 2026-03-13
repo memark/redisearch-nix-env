@@ -267,6 +267,8 @@
 
               # Python environment for integration tests
               pythonEnv
+              python312
+              python313
 
               # Needed by python tests
               wget
