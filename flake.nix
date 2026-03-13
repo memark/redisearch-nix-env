@@ -296,6 +296,11 @@
 
               # Cache for faster rebuilds
               sccache
+
+              # Awesome tools
+              ripgrep
+              fd
+              sd
             ];
 
             packages = with pkgs; [
