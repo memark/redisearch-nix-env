@@ -291,6 +291,7 @@
               clang_21
               libxcrypt
               lld_21
+              # To get `llvm-ar` for `VecSim`
               llvmPackages_21.bintools-unwrapped
 
               # To profile the code or benchmarks
