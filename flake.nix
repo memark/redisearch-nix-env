@@ -12,7 +12,7 @@
     };
 
     redis-flake = {
-      url = "github:chesedo/redis-flake";
+      url = "github:mainmatter/redis-flake";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };

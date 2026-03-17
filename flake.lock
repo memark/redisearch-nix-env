@@ -96,15 +96,15 @@
         "redis": "redis"
       },
       "locked": {
-        "lastModified": 1770189049,
-        "narHash": "sha256-bA2FyIn00+XPGT6NYGvmszvYmglneBhC9VKIT8rYbRU=",
-        "owner": "chesedo",
+        "lastModified": 1773729697,
+        "narHash": "sha256-fnWYvEdBLUQrsAYxF7358AdO7ipZm4bUJIHjaDKbke0=",
+        "owner": "mainmatter",
         "repo": "redis-flake",
-        "rev": "dddb47940355f701e5d606e7f5646ab5d073f596",
+        "rev": "a5c6a6bd15508ce47e50938efe8f23be7674a148",
         "type": "github"
       },
       "original": {
-        "owner": "chesedo",
+        "owner": "mainmatter",
         "repo": "redis-flake",
         "type": "github"
       }
