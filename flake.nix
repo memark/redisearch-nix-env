@@ -234,8 +234,6 @@
 
               echo -e "\033[1;36m=== 🦀 Welcome to the RediSearch development environment ===\033[0m"
               echo -e "\033[1;33m• $cargo_version\033[0m"
-              echo -e "\n\033[1;33m• Checking for any outdated packages...\033[0m\n"
-              cd src/redisearch_rs && cargo outdated --root-deps-only
 
               # For libclang dependency to work
               export LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib"
