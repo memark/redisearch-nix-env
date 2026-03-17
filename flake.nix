@@ -254,16 +254,20 @@
             '';
 
             buildInputs = with pkgs; [
-              # For LSP
-              ccls
-
               # Dev dependencies based on developer.md
-              cmake
               openssl.dev
               libxcrypt
 
               # To run the unit tests
               gtest.dev
+            ];
+
+            packages = with pkgs; [
+              # For LSP
+              ccls
+
+              # Dev dependencies based on developer.md
+              cmake
 
               # Python environment for integration tests
               pythonEnv
@@ -272,14 +276,8 @@
               wget
               redis-source
 
-              rust-bin.stable.latest.default
-
               # For LTO
-              clang_21
               libxcrypt
-              lld_21
-              # To get `llvm-ar` for `VecSim`
-              llvmPackages_21.bintools-unwrapped
 
               # To profile the code or benchmarks
               samply
@@ -296,9 +294,15 @@
 
               # Cache for faster rebuilds
               sccache
-            ];
 
-            packages = with pkgs; [
+              # For LTO
+              clang_21
+              lld_21
+              # To get `llvm-ar` for `VecSim`
+              llvmPackages_21.bintools-unwrapped
+
+              # Rust toolchain and extensions
+              rust-bin.stable.latest.default
               rust-analyzer
               cargo-watch
               cargo-outdated
@@ -342,12 +346,16 @@
 
             buildInputs = with pkgs; [
               # Dev dependencies based on developer.md
-              cmake
               openssl.dev
               libxcrypt
 
               # To run the unit tests
               gtest.dev
+            ];
+
+            packages = with pkgs; [
+              # Dev dependencies based on developer.md
+              cmake
 
               # Python environment for integration tests
               pythonEnv
@@ -362,15 +370,13 @@
                 ];
               }))
 
+              # To resolve ASAN symbols
+              llvmPackages.bintools
+
+              # Rust toolchain and extensions
               (rust-bin.nightly."2026-01-05".default.override {
                 extensions = [ "rust-src" "miri" "llvm-tools-preview" ];
               })
-
-              # To resolve ASAN symbols
-              llvmPackages.bintools
-            ];
-
-            packages = with pkgs; [
               cargo-llvm-cov
               cargo-nextest
               lcov
