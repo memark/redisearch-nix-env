@@ -21,16 +21,16 @@
     "ftsb-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1744216595,
-        "narHash": "sha256-mj16uC2E6fXa8ItHzrZu/tLEORl1ZgDxj6jxOnXzJ/s=",
+        "lastModified": 1770296281,
+        "narHash": "sha256-06Nas7TZgqEFVkiAT8A+JtOUIGA9gB74O33h2jEiyeI=",
         "owner": "RediSearch",
         "repo": "ftsb",
-        "rev": "700a65fe1e5bcc85f5b949bef7fa2a991967daee",
+        "rev": "ac063e5d935a351f3126be3bf8d6abe803dc111b",
         "type": "github"
       },
       "original": {
         "owner": "RediSearch",
-        "ref": "v0.3.10",
+        "ref": "v0.5.0",
         "repo": "ftsb",
         "type": "github"
       }
@@ -112,16 +112,15 @@
     "redisbench-admin-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1760720421,
-        "narHash": "sha256-SE+evvdbQDhUrf4T8K5aK3WvZ92BD8mFlGoB2dOfGJE=",
-        "owner": "chesedo",
+        "lastModified": 1771412018,
+        "narHash": "sha256-rhw6csPxmc5yDz3BEYgBtLVbsubj5/yM5g4Ky5hFB6I=",
+        "owner": "redis-performance",
         "repo": "redisbench-admin",
-        "rev": "4fa5e959575525db75b558e2be8ee8643a06febc",
+        "rev": "3b0c4e4b040b5a870aed27f4708242c626cc87dd",
         "type": "github"
       },
       "original": {
-        "owner": "chesedo",
-        "ref": "do_not_daemonize",
+        "owner": "redis-performance",
         "repo": "redisbench-admin",
         "type": "github"
       }

@@ -28,12 +28,12 @@
     };
 
     redisbench-admin-src = {
-      url = "github:chesedo/redisbench-admin/do_not_daemonize";
+      url = "github:redis-performance/redisbench-admin";
       flake = false;  # Use the source directly, not as a flake
     };
 
     ftsb-src = {
-      url = "github:RediSearch/ftsb/v0.3.10";
+      url = "github:RediSearch/ftsb/v0.5.0";
       flake = false;  # Use the source directly, not as a flake
     };
   };
@@ -114,7 +114,7 @@
         # Custom redisbench-admin package
         redisbench-admin = pkgs.python3Packages.buildPythonPackage rec {
           pname = "redisbench-admin";
-          version = "0.11.41";
+          version = "0.12.10";
 
           src = redisbench-admin-src;
 
@@ -122,9 +122,6 @@
           build-system = with pkgs.python3Packages; [
             poetry-core
           ];
-
-          # Add perl as a build input
-          nativeBuildInputs = [ pkgs.perl ];
 
           dependencies = with pkgs.python3Packages; [
             flask
@@ -176,14 +173,6 @@
             wget
           ];
 
-          # Fix perl shebangs in .pl files
-          postInstall = ''
-            for file in $out/${pkgs.python3.sitePackages}/redisbench_admin/profilers/*.pl; do
-              substituteInPlace "$file" \
-                --replace-fail "#!/usr/bin/perl" "#!${pkgs.perl}/bin/perl"
-            done
-          '';
-
           # Skip tests during build
           doCheck = false;
           dontCheckRuntimeDeps = true;
@@ -198,7 +187,7 @@
         # Custom ftsb package
         ftsb = pkgs.buildGoModule {
           pname = "ftsb";
-          version = "0.3.10";
+          version = "0.5.0";
 
           src = ftsb-src;
 
